@@ -16,6 +16,9 @@
         <h3 align="center">Import Excel File in Laravel</h3>
         <br />
 
+        @if (count($errors) > 0)
+
+        @endif
     <form action="{{ url('import_excel/import') }}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <table class="table">
