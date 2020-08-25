@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Import Excel File in Laravel</title>
-    <script rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery/.min.js"></script>
+    <script rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstapr.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
     <br />
@@ -17,7 +17,20 @@
         <br />
 
         @if (count($errors) > 0)
-
+            <div class="alert alert-danger">
+                Upload Validation Error<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if ($message = Session::get('success '))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ $message }}</strong>
+            </div>
         @endif
     <form action="{{ url('import_excel/import') }}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
@@ -57,16 +70,7 @@
                                 <th>Postal Code</th>
                                 <th>Country</th>
                             </tr>
-                            @foreach ($data as $row)
-                                <tr>
-                                    <td>{{ $row->CustomerName }}</td>
-                                    <td>{{ $row->Gender }}</td>
-                                    <td>{{ $row->Address }}</td>
-                                    <td>{{ $row->City }}</td>
-                                    <td>{{ $row->PostalCode }}</td>
-                                    <td>{{ $row->Country }}</td>
-                                </tr>
-                            @endforeach
+
                         </table>
                     </div>
                 </div>
